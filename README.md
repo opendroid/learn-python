@@ -30,6 +30,23 @@ for value in repeat[:]:  # repeat[:] creates a copy
 # repeat now is [1,2,3,1,2,3]
 ```
 
+#### List APIs
+The [Data Structures - More on lists](https://docs.python.org/3/tutorial/datastructures.html) documents all APIs. Some are:
+
+```python
+colors = ["violet", "indigo", "blue"]
+
+# Stack, push (append function)
+colors.append("green")
+colors.append("yellow")
+
+# Pop first element
+violet = colors.pop(0) # colors now is: ["indigo", "blue", "green", "green"]
+
+# Sort 
+colors.sort(reverse = True)
+```
+
 ## Control Statements
 
 ### for
