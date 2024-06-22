@@ -67,3 +67,12 @@ for i, c in enumerate(cubes):
 ```
 
 for-loop can work with `range()` function.
+
+
+# Utilities
+
+```shell
+# Masure time of each function execution
+
+python -m cProfile file.py
+```
