@@ -1,5 +1,11 @@
-# Examples of arrays
+"""
+Learn about lists (equivalent to arrays in other languages). Be careful not to change the lists while iterating over them.
 
+
+Author: opendroid
+Email: openweb@outlook.com
+License: MIT
+"""
 # Int arrays
 primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29]
 
@@ -28,6 +34,7 @@ motto = "Pursuit of Excellence"
 print(f"motto: {motto}, length={len(motto)}")
 print(f"motto: first char: {motto[0]}, last: {motto[-1]}")
 
+
 # reverse function reverses a string
 def reverse(sentence):
     idx = -1
@@ -49,3 +56,18 @@ print(f"words: {len(words)}")
 for word in words[:]:
     words.append(word)
 print(f"Duplicated words: {words}")
+
+# Initialization of arrays
+# Method-1: List Multiplication, only be used for immutable elements like numbers.
+# If you use it with mutable elements (like lists), all elements will refer to the
+# same underlying object, leading to unexpected behavior.
+array1_10 = [99] * 10  # initialize the int array
+print(f"ten ints: {[f'[{i}]:{v}'  for i, v in enumerate(array1_10)]}")
+
+# Method-2: Comprehension
+array1_5 = [100 for _ in range(5)]  # initialize the int array using list-comprehension
+print(f"five ints: {[f'[{i}]:{v}'  for i, v in enumerate(array1_5)]}")
+
+# Method-3:
+array1_10 = [].extend([22] * 10)
+print(f"Ten ints: {[f'[{i}]:{v}'  for i, v in enumerate(array1_10)]}")
