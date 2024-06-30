@@ -1,0 +1,5 @@
+id,name,state,lat,long
+1000,Peabody,CA,42.536457,-70.985786
+1001,Northampton,MA,42.328674,-72.664658
+1002,Holyoke,MA,42.203217,-72.625481
+1003,Bardstown, KY,37.820415,-85.467949

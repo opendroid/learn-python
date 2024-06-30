@@ -22,6 +22,13 @@ primes.append(11) # Add another prime
 primes[:] = [] # clear the list
 ```
 
+You can initalize in various ways:
+```python
+array1_10 = [99] * 10 # List multiplication
+
+```
+
+
 While iterating over a list do not update the list. If you need to update the list in a loop iterate over copy. 
 ```python
 repeat = [1, 2, 3]
@@ -67,7 +74,11 @@ for i, c in enumerate(cubes):
 ```
 
 for-loop can work with `range()` function.
-
+```python
+# Iterate 0, 1, 2, 3
+for i in range(4):
+    print(f"cube[{i}]={cubes[i]}")
+```
 
 # Utilities
 
