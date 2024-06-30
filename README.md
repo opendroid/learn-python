@@ -24,10 +24,17 @@ primes[:] = [] # clear the list
 
 You can initalize in various ways:
 ```python
-array1_10 = [99] * 10 # List multiplication
+# Method 1: One by one
+array1_10 = []
+for _ in range(10):
+    array1_10.append(99)
 
+# Method 2: List multiplication
+array2_10 = [99] * 10
+
+# Method 3: List Comprehension (Most Pythonic)
+array3_10 = [99 for _ in range(10)]
 ```
-
 
 While iterating over a list do not update the list. If you need to update the list in a loop iterate over copy. 
 ```python
