@@ -39,7 +39,7 @@ print(f"motto: first char: {motto[0]}, last: {motto[-1]}")
 def reverse(sentence):
     idx = -1
     reversed = []
-    for i in range(len(sentence)):
+    for _ in range(len(sentence)):
         reversed.append(sentence[idx])
         idx -= 1
     return "".join(reversed)
