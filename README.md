@@ -61,6 +61,13 @@ violet = colors.pop(0) # colors now is: ["indigo", "blue", "green", "green"]
 colors.sort(reverse = True)
 ```
 
+List can be sliced using [start:end:step] pattern. Step can be positive or negative
+ - Positive step values will splice: start, start+step, start+2*step, ... end
+ - Negative step value will splice: end, end-step, end-2*step, ... start 
+
+Splicing created a new copy of list. Modifying new will not affect original.
+
+
 ## Control Statements
 
 ### for
