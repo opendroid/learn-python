@@ -36,7 +36,7 @@ array2_10 = [99] * 10
 array3_10 = [99 for _ in range(10)]
 ```
 
-While iterating over a list do not update the list. If you need to update the list in a loop iterate over copy. 
+While iterating over a list do not update the list. If you need to update the list in a loop iterate over copy.
 ```python
 repeat = [1, 2, 3]
 for value in repeat[:]:  # repeat[:] creates a copy
@@ -57,13 +57,13 @@ colors.append("yellow")
 # Pop first element
 violet = colors.pop(0) # colors now is: ["indigo", "blue", "green", "green"]
 
-# Sort 
+# Sort
 colors.sort(reverse = True)
 ```
 
 List can be sliced using [start:end:step] pattern. Step can be positive or negative
  - Positive step values will splice: start, start+step, start+2*step, ... end
- - Negative step value will splice: end, end-step, end-2*step, ... start 
+ - Negative step value will splice: end, end-step, end-2*step, ... start
 
 Splicing created a new copy of list. Modifying new will not affect original.
 
@@ -71,16 +71,16 @@ Splicing created a new copy of list. Modifying new will not affect original.
 ## Control Statements
 
 ### for
-A for-loop is used for iterating over a list, a tuple, a dictionary, a set, or a string sequence. 
+A for-loop is used for iterating over a list, a tuple, a dictionary, a set, or a string sequence.
 
 ```python
 squares = [1**2, 2**2, 3**2, 4**2]
 # Print each value
 for val in squares:
-    print(f"val = {val}") 
+    print(f"val = {val}")
 ```
 
-Use enumerate to get a index. 
+Use enumerate to get a index.
 ```python
 cubes = [1**3, 2**3, 3**3, 4**3]
 for i, c in enumerate(cubes):
@@ -100,4 +100,17 @@ for i in range(4):
 # Masure time of each function execution
 
 python -m cProfile file.py
+```
+
+# Environment
+
+Use these commands to setup and create virtual environment.
+```sh
+# Crate virtual env
+python3 -m venv .venv
+# Activate virtual environment
+source .venv/bin/activate
+
+# Install packages using
+pip3 install pandas
 ```
