@@ -1,5 +1,6 @@
 """
-This module experiments with Pandas DataFrame. Crate, update index and add elements to a DataFrame,
+This module experiments with Pandas DataFrame. Crate, update index and add
+elements to a DataFrame,
 
 
 Author: opendroid
@@ -13,7 +14,8 @@ import pandas as pd
 def dp_examples_1():
     """use dictionary to create the DataFrame.
 
-    Create a frame with theree column names: "column-1-heading", "column-2-heading" and "column-3-heading".
+    Create a frame with theree column names:
+    "column-1-heading", "column-2-heading" and "column-3-heading".
     The default row index labels are 0, 1, 2, 3.
     """
     data = {
@@ -34,12 +36,14 @@ def dp_examples_1():
 
     # Rename the row-labels.
     df2.rename(
-        index={"row-0": 0, "row-1": 100, "row-2": 200, "row-3": 300, "row-4": 400},
+        index={"row-0": 0, "row-1": 100,
+               "row-2": 200, "row-3": 300, "row-4": 400},
         inplace=True,
     )
 
     # Add a row to the dataframe
-    row = {"column-1-heading": 3, "column-2-heading": "Three", "column-3-heading": 25}
+    row = {"column-1-heading": 3,
+           "column-2-heading": "Three", "column-3-heading": 25}
     df2.loc[len(df2)] = row  # Add row at default index = 5
     df2.rename(index={5: 500}, inplace=True)
     print(f"dp_examples_1: df2-updated index and adding a row:\n{df2}")

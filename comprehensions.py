@@ -55,7 +55,8 @@ for i in range(4):
 print(f"transposed 3: {transposed}")
 
 # Transposed: forth approach (comprehension):
-#  "[row[i] for row in matrix]" is evaluated in context of inner for loop: for i in range(4)
+#  "[row[i] for row in matrix]" is evaluated in context of inner for loop:
+#      for i in range(4)
 #   [row[0][0] row[1][0] row[2][0]]
 #   [row[0][1] row[1][1] row[2][1]]
 #   [row[0][2] row[1][2] row[2][2]]

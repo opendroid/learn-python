@@ -7,11 +7,10 @@ Email: openweb@outlook.com
 License: MIT
 """
 
-import sys
-
 
 def file_handling_exceptions(filename):
-    """Reads a file with a int in a line. Raises exceptions. Note that how the file close() is getting handled."""
+    """Reads a file with a int in a line. Raises exceptions. Note that how the
+        file close() is getting handled."""
     print("file_handling_exceptions: ===>")
     try:
         f = open(filename, "r")
@@ -43,7 +42,7 @@ def file_handling_exceptions_with(filename):
             else:  # If no exception is raised
                 print(f"file_handling_exceptions_with: int read: {value}")
             finally:  # Executed all the time
-                print(f"file_handling_exceptions_with: finally.")
+                print("file_handling_exceptions_with: finally.")
     except OSError as err:
         print(f"file_handling_exceptions_with: OS Error: {err}")
     return

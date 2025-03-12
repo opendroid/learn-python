@@ -9,7 +9,6 @@ License: MIT
 import os
 import sys
 import time
-import glob
 
 
 def os_examples():
@@ -22,6 +21,7 @@ def os_examples():
     print(f"Created at: {time.ctime(stats.st_mtime)}, ", end="")
     print(f"Modifiled at: {time.ctime(stats.st_atime)}")
     print(f"Files: {[file for file in files]}")
+    print(f"CPUs: {os.process_cpu_count()}")
     return
 
 
@@ -36,18 +36,20 @@ def sys_examples():
     # Python interpreter
     print(f"\nPlatform {sys.platform}")
     print(f" Python version: {sys.version}\n Excutable path: {sys.executable}")
-    print(f"\nSystem-Specific Parameters.:\n Recusion limit: {sys.getrecursionlimit()}")
+    print("\nSystem-Specific Parameters.:\n Recusion limit:", sep=" ")
+    print(f"{sys.getrecursionlimit()}")
 
     # Interpreter values
-    print(f"\nImplementation attributes:")
+    print("\nImplementation attributes:")
     for attr in dir(sys.implementation):
-        if not attr.startswith("_"):  # Exclude private attributes (e.g., __name__)
+        if not attr.startswith("_"):
+            # Exclude private attributes (e.g., __name__)
             value = getattr(sys.implementation, attr)
             print(f" {attr}: {value}")
 
     print(f" Size of object: {sys.getsizeof(int)}")
     print(f"\nModules:\n {str(sys.modules)[:80]}...")
-    print(f"Paths:")
+    print("Paths:")
     for i, path in enumerate(sys.path):
         print(f" [{i}]: {path}")
     return
