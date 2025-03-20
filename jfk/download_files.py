@@ -56,5 +56,5 @@ def download_files(links, destination_dir):
 
 
 if __name__ == "__main__":
-    links = extract_filenames("../data/jfk/webdata.html")
+    links = extract_filenames("../data/jfk_files.html")
     download_files(links, "../data/jfk")
