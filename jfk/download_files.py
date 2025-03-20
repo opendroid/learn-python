@@ -14,6 +14,7 @@
 # 7. The dropdown is in the "Accessing the Records" section.
 
 import requests
+from tqdm import tqdm
 import os
 from extract_filenames import extract_filenames
 
@@ -30,6 +31,9 @@ def download_files(links, destination_dir):
     """
     failed_links = []
     existing_files = []
+    print(f"\nDownloading {len(links)} files...")
+    # Show progress with tqdm
+    pbar = tqdm(total=len(links), desc="Downloading")
     for i, link in enumerate(links):
         if os.path.exists(f"{destination_dir}/{link.split('/')[-1]}"):
             existing_files.append(link)
@@ -38,9 +42,11 @@ def download_files(links, destination_dir):
         if response.status_code != 200:
             failed_links.append(link)
         with open(f"{destination_dir}/{link.split('/')[-1]}", "wb") as file:
-            # file.write(response.content)
-            pass
-        print(f"{i+1}: Downloaded {len(links)} files")
+            file.write(response.content)
+        pbar.update(1)
+
+    print(f"Failed to download: {len(failed_links)} links")
+    print(f"Downloaded: {len(links) - len(failed_links)} files")
 
     # Print the number of failed links
     if len(failed_links) > 0:
