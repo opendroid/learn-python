@@ -1,7 +1,7 @@
 def mates(*args):
-    """print list of names"""
+    """print list of names, arguments passed as tuple"""
     for idx, val in enumerate(args):
-        print(f"[{idx}]: {val}")
+        print(f"[{idx}]: {val} or {args[idx]}")
     return
 
 
@@ -28,7 +28,8 @@ print(f"holywood stars: {holywood_stars}")
 
 
 def prices(**items):
-    """Prints prices of {items} as dictionary."""
+    """Keyword:Arguments passed as dictionary.
+    Prints prices of {items} as dictionary."""
     for idx, item in enumerate(items):
         print(f"[{idx}] {item}: {items[item]}")
     return
@@ -46,3 +47,16 @@ def execute_sate(state: str, event: str, action: str):
 state = {"state": "processing", "event": "deposit", "action": "add"}
 execute_sate(**state)
 print(f"annotations: {execute_sate.__annotations__}")
+
+
+def combined_args(pos1, *args_tuple, pos2=5, **kwargs_dict):
+    """Order matters. Tuple must be before tge keword argu ents"""
+    print("Combined Arguments: ===>")
+    print(f"pos1: {pos1}")
+    print(f"tuple: {args_tuple}")
+    print(f"pos2: {pos2}")
+    print(f"dict: {kwargs_dict}")
+    return
+
+
+combined_args(10, 20, 30, 40, pos2=50, name="Joe", age=200, location="CA")
