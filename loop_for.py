@@ -1,4 +1,5 @@
-# A for-loop is used for iterating over a list, a tuple, a dictionary, a set, or a string sequence.
+# A for-loop is used for iterating over a list, a tuple, a dictionary, a set,
+#  or a string sequence.
 
 
 # Range is function: range(n): 0...n-1
@@ -39,7 +40,8 @@ for i in range(40, 100):
 print(f"Answer to univers: {answer}")
 print(f"Non-Answer to univers: {non_answer}")
 
-# for loop: break-else, else - when loop finishes (not by break) by exhaustion of the range list
+# for loop: break-else, else - when loop finishes (not by break) by exhaustion
+#  of the range list
 answer, non_answer = [], []
 for i in range(30, 41):
     if i == 42:
