@@ -1,10 +1,12 @@
-"""NUmPy arrays are a type of data structure that can be used to store data in a grid of N dimensions.
-Key is "ndaarray" object that is a multi-dimensional array.
+"""NUmPy arrays are a type of data structure that can be used to store data
+in a grid of N dimensions. Key is "ndaarray" object that is a
+multi-dimensional array
 """
 
 
 import numpy as np
 
+np.random.seed(42)
 # Create a 1D array 6
 b1 = np.random.randint(10, 20, 6)
 print("B1:", b1)
@@ -31,13 +33,13 @@ print("A[1:3, 2:4]:", a[1:3, 2:4], sep="\n")  # Row 1 columns 1 to 3
 print("B[:, :]:", b[:, :])
 
 # Advanced indexing: Uses integer arrays and slices.
-# NumPy extends Python’s standard indexing mechanism by
+# NumPy extends Python's standard indexing mechanism by
 #  using overloaded operators and specialized C-level optimizations.
 # Key Python Features Used in NumPy Advanced Indexing
 # 1.	Overloaded __getitem__() & __setitem__() Methods
 # 2.	NumPy Arrays as Iterable Objects
 # 3.	Vectorized Operations(Avoiding Python Loops)
-# 4.	Memory Views and Indirect Indexing(Using NumPy’s nditer)
+# 4.	Memory Views and Indirect Indexing(Using NumPy's nditer)
 # 5.	Low-Level C Implementations for Performance
 
 # Only in NumPy: Advanced Indexing
