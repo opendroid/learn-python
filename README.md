@@ -53,6 +53,7 @@ learn-python/
 │   └── matrices.ipynb               # Matrix operations and PyTorch tensor manipulation
 │
 ├── stats/                           # Statistics, Data Analysis & Visualization
+│   ├── README.md                    # Applied statistics, EDA & NumPy/Pandas guide
 │   ├── data_frame_1.py              # Pandas DataFrame creation, indexing, CSV filtering
 │   ├── stats_fundamentals.ipynb     # Descriptive statistics and probability fundamentals
 │   ├── probability_distribution.ipynb # Common probability distributions
