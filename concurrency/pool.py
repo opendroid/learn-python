@@ -1,4 +1,4 @@
-"""This module provides examples of system processes.
+"""This module provides ways of calling various Python Multiprocessing pool types.
 
 
 Author: opendroid
@@ -6,79 +6,149 @@ Email: openweb@outlook.com
 License: MIT
 """
 from multiprocessing import Pool
-from random import randint
-import os
-import time
 
 
-def create_random(n):
-    """Worker function that create and returns an array of n random numbers.
+def _invoke(kwargs):
     """
-    return [randint(0, 100) for _ in range(n)]
+    Adapter to invoke a callable with keyword arguments.
 
+    multiprocessing.Pool.map() only supports functions that take a single
+    positional argument. This helper unpacks a (task, params) tuple and
+    calls the task using keyword argument expansion.
 
-def pool_main():
+    Args:
+        args (tuple): (task, params)
+            - task (callable): function to execute
+            - params (dict): keyword arguments for the task
+
+    Returns:
+        Any: result of task(**params)
+
+    Example:
+        _invoke((funcA, {'n': 1}))  -> funcA(n=1)
+        _invoke((funcB, {'n': 1, 'm': 2})) -> funcB(n=1, m=2)
     """
-    Compare sync and async versions of Pool.apply and Pool.map.
+    task, params = kwargs
+    return task(**params)
 
-    The results on Mac with 12 CPUs are:
-        apply-sync: 20282.022953033447ms 10 x 10000000
-        apply-async: 4340.411186218262ms 10 x 10000000
-        map-sync: 4198.2128620147705ms 10 x 10000000
-        map-async: 4394.35076713562ms 10 x 10000000
+
+def sequential(task, n_times, n_cpus, **task_params):
     """
-    count = 10_000_000
-    rows = 10
-    with Pool(processes=os.process_cpu_count()//2) as pool:
-        # Sync Apply: Crate rows large random arrays sequentially
-        start = time.time()
-        # Each apply blocks next apply.
-        results = [pool.apply(func=create_random, args=(count,))
-                   for _ in range(rows)]
-        interval = time.time() - start
-        time_taken = interval * 1000
-        print(
-            f"apply-sync: {time_taken}ms {len(results)} x {len(results[0])}"
-        )
+    Execute the task sequentially n_times in the current process.
 
-    with Pool(processes=os.process_cpu_count()//2) as pool:
-        # Async Apply: Crate rows large random arrays async
-        start = time.time()
-        results_obj = [pool.apply_async(func=create_random, args=(count,))
-                       for _ in range(rows)]
-        results = [row.get() for row in results_obj]
-        interval = time.time() - start
-        time_taken = interval * 1000
-        print(
-            f"apply-async: {time_taken}ms {len(results)} x {len(results[0])}"
-        )
+    This serves as a baseline for comparing multiprocessing overhead
+    versus pure Python execution.
 
-    with Pool(processes=os.process_cpu_count()//2) as pool:
-        # Sync Map: Crate rows large random arrays sequentially
-        start = time.time()
-        # blocked until results are fetched
-        results = pool.map(create_random, [count for _ in range(rows)])
-        interval = time.time() - start
-        time_taken = interval * 1000
-        print(
-            f"map-sync: {time_taken}ms {len(results)} x {len(results[0])}"
-        )
+    Args:
+        task (callable): function to execute
+        n_times (int): number of times to invoke the task
+        n_cpus (int): ignored (kept for API consistency)
+        **task_params: keyword arguments passed to task
 
-    with Pool(processes=os.process_cpu_count()//2) as pool:
-        # Async Map: Crate 4 large random arrays sequentially
-        start = time.time()
-        # Immediately return
-        results_obj = pool.map_async(
-            create_random, [count for _ in range(rows)])
-        # Do other things before you need results.
-        results = results_obj.get()
-        interval = time.time() - start
-        time_taken = interval * 1000
-        print(
-            f"map-async: {time_taken}ms {len(results)} x {len(results[0])}"
-        )
-    return
+    Returns:
+        list: results of each task invocation
+
+    Notes:
+        - No parallelism is used.
+        - Invocation pattern: task(**task_params)
+    """
+    return [task(**task_params) for _ in range(n_times)]
 
 
-if __name__ == "__main__":
-    pool_main()
+
+def pool_apply(task, n_times, n_cpus, **task_params):
+    """
+    Execute the task using Pool.apply().
+
+    Each call to apply() is blocking, so tasks are executed one at a time,
+    even though a pool of worker processes exists.
+
+    Args:
+        task (callable): function to execute
+        n_times (int): number of times to invoke the task
+        n_cpus (int): number of worker processes (mostly irrelevant here)
+        **task_params: keyword arguments passed to task
+
+    Returns:
+        list: results of each task invocation
+
+    Notes:
+        - No parallelism across iterations due to blocking behavior.
+        - Useful only for API comparison, not performance benchmarking.
+    """
+    with Pool(n_cpus) as pool:
+        return [pool.apply(_invoke, [(task, task_params)]) for _ in range(n_times)]
+
+
+def pool_apply_async(task, n_times, n_cpus, **task_params):
+    """
+    Execute the task in parallel using Pool.apply_async().
+
+    Tasks are submitted asynchronously and executed in parallel across
+    worker processes. Results are collected via AsyncResult.get().
+
+    Args:
+        task (callable): function to execute
+        n_times (int): number of times to invoke the task
+        n_cpus (int): number of worker processes
+        **task_params: keyword arguments passed to task
+
+    Returns:
+        list: results in submission order
+
+    Notes:
+        - Enables true parallel execution.
+        - Order is preserved because results are retrieved in submission order.
+    """
+    with Pool(n_cpus) as pool:
+        futures = [pool.apply_async(_invoke, [(task, task_params)]) for _ in range(n_times)]
+        return [f.get() for f in futures]
+
+        
+def pool_map(task, n_times, n_cpus, **task_params):
+    """
+    Execute the task in parallel using Pool.map().
+
+    Tasks are distributed across worker processes and executed in parallel.
+    Results are returned in the same order as the input sequence.
+
+    Args:
+        task (callable): function to execute
+        n_times (int): number of times to invoke the task
+        n_cpus (int): number of worker processes
+        **task_params: keyword arguments passed to task
+
+    Returns:
+        list: results in input order
+
+    Notes:
+        - Uses a wrapper (_invoke) because map() only supports single-argument functions.
+        - Blocks until all tasks complete.
+    """
+    with Pool(n_cpus) as pool:
+        return pool.map(_invoke, [(task, task_params)] * n_times)
+
+
+def pool_map_async(task, n_times, n_cpus, **task_params):
+    """
+    Execute the task in parallel using Pool.map_async().
+
+    Similar to pool_map, but submits work asynchronously. However,
+    calling .get() immediately makes this effectively blocking.
+
+    Args:
+        task (callable): function to execute
+        n_times (int): number of times to invoke the task
+        n_cpus (int): number of worker processes
+        **task_params: keyword arguments passed to task
+
+    Returns:
+        list: results in input order
+
+    Notes:
+        - True asynchrony requires doing other work before calling .get().
+        - Without that, behavior is equivalent to pool_map().
+    """
+    with Pool(n_cpus) as pool:
+        async_result = pool.map_async(_invoke, [(task, task_params)] * n_times)
+        return async_result.get()
