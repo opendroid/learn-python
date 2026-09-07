@@ -8,32 +8,29 @@ A comprehensive repository and reference guide exploring Python 3 core concepts,
 
 ```text
 learn-python/
-├── lang-basics/                     # Python 3 Core Syntax & Language Basics
+├── lang-basics/                     # Python 3 Core Syntax, Types & Collections
 │   ├── basic_data_types.py          # Primitive types, dynamic typing, type hints
 │   ├── strings.py                   # String literals, formatting (f-strings), escaping
 │   ├── repetition_operator.py       # Sequence repetition (*) gotchas (mutable vs immutable)
 │   ├── loop_for.py                  # Loops, range(), enumerate(), continue/break/else
 │   ├── loop_for_tuples.py           # Tuple unpacking and iteration
-│   ├── comprehensions.py            # List, set, and nested comprehensions
+│   ├── lists.py                     # List manipulation APIs (append, extend, pop, sort)
+│   ├── list_slicing.py              # Slicing patterns [start:end:step]
+│   ├── list_of_class.py             # Storing & querying objects in lists, lambda helpers
+│   ├── list_deque_fifo.py           # FIFO queues: list.pop(0) vs collections.deque.popleft() benchmark
 │   ├── sets.py                      # Set operations (unions, intersections, differences)
+│   ├── comprehensions.py            # List, set, and nested comprehensions
 │   ├── exceptions.py                # Error handling (try / except / else / finally)
-│   ├── std_library_examples.py      # Standard library modules (os, sys, time, system introspection)
-│   ├── three_sum.py                 # Algorithmic problem solving (3-Sum hash map approach)
-│   └── data_frame_1.py              # Introduction to Pandas DataFrames
+│   └── std_library_examples.py      # Standard library modules (os, sys, time, system introspection)
 │
-├── funcs/                           # Functions & OOP
+├── functions-and-oop/               # Functional Programming & Object-Oriented Design
 │   ├── args_immutable.py            # Passing immutable arguments
 │   ├── args_mutable.py              # Passing mutable arguments & in-place mutations
 │   ├── args_variable.py             # Variadic arguments (*args, **kwargs, unpacking)
 │   └── classes.py                   # Object-oriented programming (classes, methods, state)
 │
-├── lists/                           # List Data Structures & Queues
-│   ├── lists.py                     # List manipulation APIs (append, extend, pop, sort)
-│   ├── list_slicing.py              # Slicing patterns [start:end:step]
-│   ├── list_of_class.py             # Storing & querying objects in lists, lambda helpers
-│   └── list_deque_fifo.py           # FIFO queues: list.pop(0) vs collections.deque.popleft() benchmark
-│
-├── trees/                           # Tree & Graph Data Structures
+├── algorithms-and-ds/               # Data Structures & Algorithmic Problem Solving
+│   ├── three_sum.py                 # 3-Sum algorithm (hash set / two-pointer approach)
 │   ├── binary_tree.py               # Binary Tree traversals (pre-order, in-order, post-order)
 │   ├── trie.py                      # Trie (Prefix Tree) implementation & recursive traversal
 │   └── graphs_example_1.py          # Graph algorithms & representation
@@ -44,16 +41,17 @@ learn-python/
 │   ├── task_rng.py                  # Random number generation worker tasks
 │   └── benchmark_rng.py             # Performance benchmarking across worker pools
 │
-├── ip-relay-gpus/                   # Mathematical Modeling & Simulation
+├── ip-relay-gpus/                   # Mathematical Modeling & Capacity Simulation
 │   └── gpus-need.py                 # GPU capacity planning, Poisson/Normal arrival rate simulation
 │
 ├── numpy/                           # Numerical Computing
 │   └── numpy_basics.ipynb           # N-dimensional arrays, operations, indexing
 │
 ├── pytorch/                         # Deep Learning & Tensors
-│   └── matices.ipynb                # Matrix operations and PyTorch tensor manipulation
+│   └── matrices.ipynb               # Matrix operations and PyTorch tensor manipulation
 │
 ├── stats/                           # Statistics, Data Analysis & Visualization
+│   ├── data_frame_1.py              # Pandas DataFrame creation, indexing, CSV filtering
 │   ├── stats_fundamentals.ipynb     # Descriptive statistics and probability fundamentals
 │   ├── probability_distribution.ipynb # Common probability distributions
 │   ├── advanced_statistics.ipynb    # Inferential statistics & hypothesis testing
@@ -122,7 +120,7 @@ answer = f"The answer to the Ultimate Question of Life, the Universe, and Everyt
 
 ### 3. Lists & Queues
 
-`lists/lists.py`, `lists/list_slicing.py`, `lists/list_of_class.py`, `lists/list_deque_fifo.py`
+`lang-basics/lists.py`, `lang-basics/list_slicing.py`, `lang-basics/list_of_class.py`, `lang-basics/list_deque_fifo.py`
 
 - **Slicing**: `list[start:end:step]` creates a shallow copy. Negative steps iterate backwards (e.g., `[::-1]`).
 - **Mutation in Loops**: Always iterate over a copy `for item in original[:]` when appending or removing elements inside the loop.
@@ -174,7 +172,7 @@ for real, imag in complex_numbers:
 
 ### 6. Functions & Object-Oriented Programming (OOP)
 
-`funcs/args_variable.py`, `funcs/args_mutable.py`, `funcs/args_immutable.py`, `funcs/classes.py`
+`functions-and-oop/args_variable.py`, `functions-and-oop/args_mutable.py`, `functions-and-oop/args_immutable.py`, `functions-and-oop/classes.py`
 
 - **Variadic Arguments**: `*args` captures positional arguments as a `tuple`, and `**kwargs` captures keyword arguments as a `dict`.
 - **Pass-by-Object-Reference**: Modifying mutable parameters (lists/dicts) in functions persists outside the function scope, whereas reassigning immutable parameters (ints/strings) does not.
@@ -193,10 +191,11 @@ class Circle:
 
 ---
 
-### 7. Trees & Data Structures
+### 7. Algorithms & Data Structures
 
-`trees/binary_tree.py`, `trees/trie.py`, `trees/graphs_example_1.py`
+`algorithms-and-ds/three_sum.py`, `algorithms-and-ds/binary_tree.py`, `algorithms-and-ds/trie.py`, `algorithms-and-ds/graphs_example_1.py`
 
+- **3-Sum Problem**: $O(n^2)$ two-pointer / hash set algorithmic solution.
 - **Binary Tree**: Node connections with pre-order, in-order, and post-order recursive and iterative traversals.
 - **Trie (Prefix Tree)**: Efficient string and prefix storage, lookups, and frequency counting.
 - **Graphs**: Node adjacency and traversal algorithms.
@@ -217,53 +216,35 @@ Python's `multiprocessing` library bypasses the Global Interpreter Lock (GIL) fo
 
 ### 9. Standard Library & Introspection
 
-`lang-basics/std_library_examples.py`
+`lang-basics/std_library_examples.py`, `lang-basics/exceptions.py`
 
 - `os`: File system operations, file metadata (`stat`), directory listing (`listdir`), CPU counts (`process_cpu_count`).
 - `sys`: Python interpreter configuration, command-line arguments (`argv`), platform, recursion limits, and memory footprint (`getsizeof`).
+- `exceptions`: Robust error handling with `try`, `except`, `else`, and `finally` blocks.
 
 ---
 
 ### 10. Data Science, Statistics & Machine Learning
 
-`stats/`, `numpy/`, `pytorch/`, `lang-basics/data_frame_1.py`
+`stats/`, `numpy/`, `pytorch/`
 
-- **Pandas**: DataFrame creation, column indexing, series operations, CSV parsing.
-- **NumPy**: Matrix algebra, multi-dimensional array slicing, broadcasting.
-- **PyTorch**: Tensor initialization, linear algebra operations, GPU/CPU tensor computations.
-- **Statistics**: Probability distributions, Z-tests, descriptive analysis, correlation, and data visualization using Matplotlib & Seaborn.
+- **Pandas** (`stats/data_frame_1.py`): DataFrame creation, column indexing, series operations, CSV parsing.
+- **NumPy** (`numpy/numpy_basics.ipynb`, `stats/numpy_arrays.py`): Matrix algebra, multi-dimensional array slicing, broadcasting.
+- **PyTorch** (`pytorch/matrices.ipynb`): Tensor initialization, linear algebra operations, GPU/CPU tensor computations.
+- **Statistics** (`stats/*.ipynb`): Probability distributions, Z-tests, descriptive analysis, correlation, and data visualization using Matplotlib & Seaborn.
 
 ---
 
 ## Environment Setup & Tools
 
-### Virtual Environment (venv)
+### Conda (`conda mlx`)
 
 ```bash
-# Create virtual environment
-python3 -m venv .venv
+# Activate environment
+conda activate mlx
 
-# Activate virtual environment
-source .venv/bin/activate  # macOS / Linux
-# or .venv\Scripts\activate on Windows
-
-# Install packages
-pip install -r requirements.txt  # or pip install numpy pandas scipy scikit-learn seaborn torch
-```
-
-### Conda (Anaconda / Miniconda)
-
-```bash
-# 1. Create and activate environment
-conda create -n learn-python python=3.13
-conda activate learn-python
-
-# 2. Install core packages
-conda install numpy pandas scikit-learn scipy seaborn matplotlib
-
-# 3. Export / Replicate environment
-conda env export --from-history > environment.yml
-conda env create -f environment.yml
+# Run any script with Python 3.12/3.13 in mlx env
+python lang-basics/basic_data_types.py
 ```
 
 ### Performance Profiling

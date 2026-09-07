@@ -69,5 +69,6 @@ array1_5 = [100 for _ in range(5)]  # initialize the int array using list-compre
 print(f"five ints: {[f'[{i}]:{v}'  for i, v in enumerate(array1_5)]}")
 
 # Method-3:
-array1_10 = [].extend([22] * 10)
+array1_10 = []
+array1_10.extend([22] * 10)
 print(f"Ten ints: {[f'[{i}]:{v}'  for i, v in enumerate(array1_10)]}")

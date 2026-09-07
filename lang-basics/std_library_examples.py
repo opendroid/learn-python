@@ -21,7 +21,8 @@ def os_examples():
     print(f"Created at: {time.ctime(stats.st_mtime)}, ", end="")
     print(f"Modifiled at: {time.ctime(stats.st_atime)}")
     print(f"Files: {[file for file in files]}")
-    print(f"CPUs: {os.process_cpu_count()}")
+    cpus = getattr(os, "process_cpu_count", os.cpu_count)()
+    print(f"CPUs: {cpus}")
     return
 
 
