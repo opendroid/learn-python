@@ -68,7 +68,7 @@ def plot_scaling(results, size):
 
 
 def benchmark():
-    max_cpus = os.process_cpu_count()
+    max_cpus = getattr(os, "process_cpu_count", os.cpu_count)()
 
     # Sweep dimensions
     task_sizes = [100_000, 1_000_000, 5_000_000]

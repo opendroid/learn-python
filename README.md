@@ -9,6 +9,7 @@ A comprehensive repository and reference guide exploring Python 3 core concepts,
 ```text
 learn-python/
 ├── lang-basics/                     # Python 3 Core Syntax, Types & Collections
+│   ├── README.md                    # Core language concepts, tables & reference guide
 │   ├── basic_data_types.py          # Primitive types, dynamic typing, type hints
 │   ├── strings.py                   # String literals, formatting (f-strings), escaping
 │   ├── repetition_operator.py       # Sequence repetition (*) gotchas (mutable vs immutable)
@@ -24,6 +25,7 @@ learn-python/
 │   └── std_library_examples.py      # Standard library modules (os, sys, time, system introspection)
 │
 ├── functions-and-oop/               # Functional Programming & Object-Oriented Design
+│   ├── README.md                    # Parameter semantics (*args, **kwargs) & OOP guide
 │   ├── args_immutable.py            # Passing immutable arguments
 │   ├── args_mutable.py              # Passing mutable arguments & in-place mutations
 │   ├── args_variable.py             # Variadic arguments (*args, **kwargs, unpacking)
