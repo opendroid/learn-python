@@ -43,6 +43,13 @@ learn-python/
 │   ├── task_rng.py                  # Random number generation worker tasks
 │   └── benchmark_rng.py             # Performance benchmarking across worker pools
 │
+├── mcp-experiments/                # Model Context Protocol (MCP) Client & Server
+│   ├── README.md                    # Server/client architecture & how-to guide
+│   ├── mcp_config.json              # Standard host client configuration
+│   ├── requirements.txt             # MCP package dependencies
+│   ├── server/                      # FastMCP server, tools, resources, and prompts
+│   └── client/                      # Stdio client and interactive CLI REPL
+│
 ├── ip-relay-gpus/                   # Mathematical Modeling & Capacity Simulation
 │   └── gpus-need.py                 # GPU capacity planning, Poisson/Normal arrival rate simulation
 │

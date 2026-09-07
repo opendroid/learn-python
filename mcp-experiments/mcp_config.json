@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "python-learn-tools": {
+      "command": "python",
+      "args": [
+        "/Users/AThakur/Developer/build/py3-code/learn-python/mcp-experiments/server/server.py"
+      ],
+      "env": {}
+    }
+  }
+}
